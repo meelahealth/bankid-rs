@@ -5,7 +5,11 @@
 
 # BankID-rs
 
-BankID-rs is a BankID SDK. It includes support for all the v5.1 features.
+BankID-rs is a BankID SDK for the Relying Party API v6.0 `/auth`, `/sign`, `/collect` and `/cancel` endpoints.
+
+The client is built from a `Config` holding the RP API base URL, the CA certificates that issue the server's TLS
+certificate, and the relying party's client identity. `Config::prod` and `Config::test` hold BankID's published
+endpoints and CAs; `Config::new` points the client anywhere else, such as a local stand-in for the API.
 
 To learn how to use BankID-rs, please refer to the [documentation](https://docs.rs/crate/bankid-rs/). There are some [examples that may be useful](./examples) as well.
 
@@ -23,16 +27,9 @@ We use GitHub Actions to make sure the codebase is consistent (`cargo +nightly f
 
 ## Building
 
-BankID-rs uses [`maybe_async`](https://docs.rs/maybe-async/0.2.0/maybe_async/) to switch between async and blocking clients, which is triggered inside `Cargo.toml`. So that must be taken into account when building `bankid-rs`. Read the Configuration section in the docs for more information about how to build, and more.
-
 ```sh
 $ cargo build
-```
-
-`bankid-rs` is also available as the `blocking` interface
-
-```sh
-$ cargo build --features sync
+$ cargo test
 ```
 
 ## License

@@ -2,11 +2,14 @@ use std::fmt;
 
 use serde::Deserialize;
 
-#[derive(Debug, Deserialize)]
+/// The body BankID sends with a 4xx or 5xx response (`error_response`).
+///
+/// Error codes are kept as strings: BankID "may introduce new error codes without prior notice".
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct ApiError {
-    error_code: String,
-    details: String,
+    pub error_code: String,
+    pub details: String,
 }
 
 impl std::error::Error for ApiError {}
